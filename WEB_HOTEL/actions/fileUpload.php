@@ -19,19 +19,21 @@
             $uploadOk = 0;
         }
 
+        define('BASE_URL', '../index.php?page=fileUpload&status=');
+
         // idk something with error
         if ($uploadOk == 0) {
-            header("Location: ../index.php?page=fileUpload&status=error&message=" . urlencode($message));
+            header("Location: " . BASE_URL . "error&message=" . urlencode($message));
         } else {
             // Try upload file
             if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
                 include "toThumbnail.php";
-
+        
                 $message = "Die Datei " . htmlspecialchars(basename($_FILES["file"]["name"])) . " wurde hochgeladen.";
-                header("Location: ../index.php?page=fileUpload&status=success&message=" . urlencode($message));
+                header("Location: " . BASE_URL . "success&message=" . urlencode($message));
             } else {
                 $message = "Beim Uploaden Ihrer Datei ist ein Fehler aufgetreten.";
-                header("Location: ../index.php?page=fileUpload&status=error&message=" . urlencode($message));
+                header("Location: " . BASE_URL . "error&message=" . urlencode($message));
             }
         }
     } else {

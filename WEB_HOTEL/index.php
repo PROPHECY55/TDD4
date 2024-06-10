@@ -53,6 +53,9 @@ switch ($action) {
     case 'register':
         include("actions/register.php");
         break;
+    default:
+        include("actions/login.php");
+        break;
 }
 
 include "templates/header.php";
